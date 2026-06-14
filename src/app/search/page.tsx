@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { FileSearch, FolderOpen, RefreshCw } from "lucide-react";
 import type { JudicialProcess } from "@/types";
 import { AppShell } from "@/components/layout/AppShell";
+import { OfficialSatjeImport } from "@/components/forms/OfficialSatjeImport";
 import { SearchForm } from "@/components/forms/SearchForm";
 import { ProcessTable } from "@/components/processes/ProcessTable";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -61,10 +62,11 @@ export default function SearchPage() {
   return (
     <AppShell
       title="Buscar procesos"
-      subtitle="Consulta simulada SATJE con datos de prueba para el MVP"
+      subtitle="Consulta mock para pruebas e importación manual desde el portal oficial"
     >
       <div className="space-y-6">
         <SearchForm onSearch={onSearch} loading={loading} />
+        <OfficialSatjeImport onImported={setMessage} />
         {message ? (
           <div className="flex flex-col gap-3 rounded-lg border border-green-200 bg-green-50 p-4 text-sm font-semibold text-success sm:flex-row sm:items-center sm:justify-between">
             <span>{message}</span>

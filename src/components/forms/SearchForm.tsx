@@ -1,8 +1,9 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Search } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { ExternalLink, Search } from "lucide-react";
+import { SATJE_OFFICIAL_SEARCH_URL } from "@/lib/constants";
+import { Button, LinkButton } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card, CardContent } from "@/components/ui/Card";
 
@@ -71,13 +72,25 @@ export function SearchForm({ onSearch, loading = false }: SearchFormProps) {
           {error ? <p className="rounded-md bg-red-50 p-3 text-sm text-danger">{error}</p> : null}
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <p className="text-sm text-muted">
-              SATJE se consulta en modo simulado para el MVP. No se realiza scraping ni evasión de
-              controles.
+              La consulta automática del MVP usa datos simulados. Para investigar un caso real,
+              abra el portal oficial y registre el resultado manualmente en LexMonitor.
             </p>
-            <Button type="submit" isLoading={loading} className="md:w-auto">
-              <Search className="h-4 w-4" aria-hidden="true" />
-              Buscar en SATJE
-            </Button>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <LinkButton
+                href={SATJE_OFFICIAL_SEARCH_URL}
+                target="_blank"
+                rel="noreferrer"
+                variant="outline"
+                className="sm:w-auto"
+              >
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                Abrir portal oficial
+              </LinkButton>
+              <Button type="submit" isLoading={loading} className="sm:w-auto">
+                <Search className="h-4 w-4" aria-hidden="true" />
+                Buscar mock SATJE
+              </Button>
+            </div>
           </div>
         </form>
       </CardContent>
